@@ -81,7 +81,10 @@
           </v-btn>
         </div>
       </div>
-      <div class="tab-add-button">
+      <div class="tab-add-button d-flex">
+        <v-btn icon small @click.stop="closeAllTabs()">
+          <v-icon small>mdi-close-box-multiple</v-icon>
+        </v-btn>
         <v-btn icon small @click.stop="addNewFile()">
           <v-icon small>mdi-plus</v-icon>
         </v-btn>
@@ -549,6 +552,12 @@ export default Vue.extend({
       this.saveData.childItems.push(data);
 
       this.clickSaveData(data);
+    },
+    closeAllTabs() {
+      const dataToClose = [...this.viewData];
+      dataToClose.forEach((data) => {
+        this.closeTab(data);
+      });
     },
     keydownHandler(event: KeyboardEvent) {
       if (event.ctrlKey && event.code === 'KeyS') {
